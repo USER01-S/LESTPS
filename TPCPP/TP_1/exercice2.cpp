@@ -1,10 +1,12 @@
 #include <iostream>
-
+using std::cout ;
+using std::cin ;
+using std::endl;
 int main() {
     int N;
     int totalePremiers = 0;
-    std::cout << "Saisir un entier N : ";
-    std::cin >> N;
+    cout << "Saisir un entier N : ";
+    cin >> N;
         for (int i = 2;i < N ; i++) {
             int premier = 1 ;
             for(int j = 2 ; j*j <= i; j++){
@@ -14,12 +16,12 @@ int main() {
                   }
               }
              if(premier){
-            std::cout<<i<<"\n";
+            cout<<i<<"\n";
             totalePremiers++;
                  }
         }
         
-        std::cout << "Le nombre de nombres premiers inferieurs ou egaux a " << N << " est : " << totalePremiers << std::endl;
+        cout << "Le nombre de nombres premiers inferieurs ou egaux a " << N << " est : " << totalePremiers <<endl;
 
     return 0;
     }
