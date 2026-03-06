@@ -5,12 +5,14 @@ using std :: endl ;
 using std :: string ;
 int main(){
     string chaine;
-    string chainecorreg;
-    cout<<"saisir une chaine : \n";
+    cout<<"saisir une chaine : ";
     getline(cin,chaine);
-    for(auto &c : chaine){
-       ispunct (c);
+    for (int i = 0; i < chaine.size(); i++) {
+        if (ispunct(chaine[i])) {
+            chaine.erase(chaine.begin()+ i);
+            i--;// ne pass une caractere apres la supprission car le suit de  i est i apres la supprission
     }
-    cout<<"la nouvel est  chaine : \n"<<chaine<<endl;
-    return 0 ;//ispunct ( c ) 
+}
+    cout<<"Votre chaine apres exculusion des caractères spéciaux: "<<chaine<<endl;
+    return 0 ;
 }
