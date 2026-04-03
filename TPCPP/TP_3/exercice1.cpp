@@ -3,13 +3,14 @@ using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
-
+/*
 int i = 1;    
 int* t = &i;
-
+*/
 void affichage() {
+    static int i = 1;
     cout << "Appel numero " << i << endl;
-    (*t)++;
+    ++i;
 }
 
 int main() {
@@ -29,9 +30,10 @@ int main() {
     } while (true);
 
     return 0;
-}
-/*#include <iostream>
-using std::cout;
+} 
+// #include <iostream>
+/*
+ using std::cout;
 using std::cin;
 using std::endl;
 
@@ -63,5 +65,5 @@ int main() {
 
     return 0;
 }
-
+*/
 
