@@ -1,25 +1,21 @@
-#pragma onceclass Joueur; // déclaration anticipée
+#pragma once
+#include <SFML/Graphics.hpp>
+#include "Joueur.hpp"
 
 class Obstacle {
 private:
-    float x;
-    float y;
-    float largeur;
-    float hauteur;
-    bool  solide;     // true = bloque le joueur, false = décoratif
+    float x, y;
+    float largeur, hauteur;
+    bool  solide;
 
 public:
-    // ---- Constructeur ----
     Obstacle(float x, float y, float largeur, float hauteur, bool solide = true);
 
-    // ---- Collision ----
-    bool estSolide()                       const { return solide; }
-    bool enCollision(const Joueur& joueur) const; // AABB (boîte englobante)
-
-    // ---- Affichage ----
+    bool estSolide() const { return solide; }
+    bool enCollision(const Joueur& joueur) const;
     void afficher() const;
+    void dessiner(sf::RenderWindow& window) const;
 
-    // ---- Accesseurs ----
     float getX()       const { return x; }
     float getY()       const { return y; }
     float getLargeur() const { return largeur; }

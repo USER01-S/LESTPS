@@ -1,32 +1,31 @@
-#include <string>
-// Direction de déplacement de l'ennemi
-enum class Direction {
-    GAUCHE,
-    DROITE
-};
+#pragma once
+#include <SFML/Graphics.hpp>
 
-class Joueur; // déclaration anticipée pour éviter l'inclusion circulaire
+enum class Direction { GAUCHE, DROITE };
+
+class Joueur; // déclaration anticipée
 
 class Ennemi {
 private:
-    float x;
-    float y;
+    float x, y;
     int   vie;
     int   degats;
     float vitesse;
-    float limiteGauche;   // borne gauche de la patrouille
-    float limiteDroite;   // borne droite de la patrouille
+    float limiteGauche;
+    float limiteDroite;
     Direction direction;
     bool  estVivant;
 
+    // Animation simple : compteur pour clignotement lors d'un hit
+    mutable int hitTimer;
+
 public:
-    // ---- Constructeur ----
     Ennemi(float x, float y, float limiteGauche, float limiteDroite,
            int vie = 30, int degats = 10, float vitesse = 1.5f);
 
     // ---- Comportement ----
-    void patrouiller();               // déplace l'ennemi entre ses deux bornes
-    void attaquer(Joueur& joueur);    // inflige des dégâts si collision
+    void patrouiller();
+    void attaquer(Joueur& joueur);
     bool detecterJoueur(const Joueur& joueur, float portee = 80.0f) const;
 
     // ---- Vie ----
@@ -34,11 +33,12 @@ public:
     bool estMort() const;
 
     // ---- Affichage ----
-    void afficher() const;            // dessine le sprite à (x, y)
+    void afficher() const;
+    void dessiner(sf::RenderWindow& window) const;
 
     // ---- Accesseurs ----
-    float getX()       const { return x; }
-    float getY()       const { return y; }
-    int   getVie()     const { return vie; }
-    int   getDegats()  const { return degats; }
+    float getX()      const { return x; }
+    float getY()      const { return y; }
+    int   getVie()    const { return vie; }
+    int   getDegats() const { return degats; }
 };
