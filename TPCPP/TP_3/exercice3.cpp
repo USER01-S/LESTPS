@@ -10,7 +10,7 @@ double racine(double x, bool ok=true){
         cout<<"f("<<x<<") = "<<a<<endl;
         return a ;
       }else{
-         cout<<"la fonction n'est pas definie au point \n"<< x;
+         cout<<"la fonction n'est pas definie au point \n"<< x<<"\n";
          return 0;
          }
 }

@@ -17,10 +17,11 @@ int main() {
     std::cout << "Taille du tableau : ";
     std::cin >> n;
     int tab[n];
-    std::cout << "saisir les "<<n<<" reles de votre  tableau \n ";
-    for(int i = 0; i < n; i++)
+    std::cout << "saisir les "<<n<<" reles de votre  tableau \n";
+    for(int i = 0; i < n; i++){
+        std::cout<<"element ["<<i+1<<"] :";
         std::cin >> tab[i];
-
+    }
     int grand, petit;
     MaxMin(tab, n, grand, petit);
 

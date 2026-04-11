@@ -19,9 +19,10 @@ int main() {
     cout << "\n--- Contenu du tableau ---" << endl;
     for (int i = 0; i < nbLignes; i++) {
         for (int j = 0; j < nbCol; j++) {
-            cout << tableau[i][j] << "\t";
+            cout <<"t["<<i<<"]["<<j<<"] "<<tableau[i][j] << "\t";
+         }
         cout << endl;
-    }
+   
     }
     cout << "\n--- Resultats ---" << endl;
     double sommeGlobale = 0;

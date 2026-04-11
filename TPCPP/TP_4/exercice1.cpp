@@ -39,6 +39,7 @@ int main () {
              break;
           case 4 :
              cout<<"le dernier entier saisi dans la liste est : "<<entiers.back()<<endl;
+             break;
           case 5:
              cout << "Fin du programme \n" << endl;
              break;
