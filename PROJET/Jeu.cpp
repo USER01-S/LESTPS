@@ -24,7 +24,7 @@ float Jeu::intervalleMin()  const { return Constantes::INTERVALLE_MIN[niveauActu
 // ---- Constructeur ----
 
 Jeu::Jeu() : fenetre(sf::VideoMode(Constantes::LARGEUR_FENETRE, Constantes::HAUTEUR_FENETRE),
-                     "Jeu de Cachette - 3 Niveaux - C++/SFML",
+                     "Jeu de SFRCH - 3 Niveaux - C++/SFML",
                      sf::Style::Close)
 {
     fenetre.setFramerateLimit(60);
@@ -76,16 +76,14 @@ void Jeu::lancer() {
 void Jeu::gererEvenements() {
     sf::Event evenement;
     while (fenetre.pollEvent(evenement)) {
-        if (evenement.type == sf::Event::Closed) fenetre.close();
-
+        if (evenement.type == sf::Event::Closed) fenetre.close(); // SI CLICK SUR LA CROIX (X) LA FENTRE FERMER 
+        
         if (evenement.type == sf::Event::KeyPressed) {
             switch (etat) {
             case EtatJeu::MENU:
-                if (evenement.key.code == sf::Keyboard::Num1 ||
-                    evenement.key.code == sf::Keyboard::J)
+                if (evenement.key.code == sf::Keyboard::Num1 )
                     demarrerNiveau(0);
-                else if (evenement.key.code == sf::Keyboard::Num2 ||
-                         evenement.key.code == sf::Keyboard::A)
+                else if (evenement.key.code == sf::Keyboard::Num2)
                     etat = EtatJeu::A_PROPOS;
                 else if (evenement.key.code == sf::Keyboard::Escape)
                     fenetre.close();
@@ -97,8 +95,7 @@ void Jeu::gererEvenements() {
                 break;
 
             case EtatJeu::INTRO_NIVEAU:
-                if (evenement.key.code == sf::Keyboard::Space &&
-                    horlogeIntro.getElapsedTime().asSeconds() >= 1.f)
+                if (evenement.key.code == sf::Keyboard::Space && horlogeIntro.getElapsedTime().asSeconds() >= 1.f)
                     lancerPartie();
                 else if (evenement.key.code == sf::Keyboard::Escape)
                     etat = EtatJeu::MENU;
@@ -114,19 +111,16 @@ void Jeu::gererEvenements() {
                 break;
 
             case EtatJeu::NIVEAU_REUSSI:
-                if (evenement.key.code == sf::Keyboard::Return ||
-                    evenement.key.code == sf::Keyboard::Space)
+                if (evenement.key.code == sf::Keyboard::Return || evenement.key.code == sf::Keyboard::Space)
                     demarrerNiveau(niveauActuel + 1);
                 else if (evenement.key.code == sf::Keyboard::Escape)
                     etat = EtatJeu::MENU;
                 break;
-
             case EtatJeu::FIN_PARTIE:
                 if (evenement.key.code == sf::Keyboard::R) demarrerNiveau(0);
                 else if (evenement.key.code == sf::Keyboard::Escape)
                     etat = EtatJeu::MENU;
                 break;
-
             case EtatJeu::VICTOIRE:
                 if (evenement.key.code == sf::Keyboard::R) demarrerNiveau(0);
                 else if (evenement.key.code == sf::Keyboard::Escape)
@@ -137,8 +131,7 @@ void Jeu::gererEvenements() {
     }
 
     if (etat == EtatJeu::JOUER) {
-        bool accroupir = sf::Keyboard::isKeyPressed(sf::Keyboard::S) ||
-                         sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
+        bool accroupir =  sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
         joueur.sAccroupir(accroupir);
     }
 }
@@ -146,8 +139,7 @@ void Jeu::gererEvenements() {
 // ---- Mise à jour ----
 
 void Jeu::mettreAJour() {
-    if (etat == EtatJeu::INTRO_NIVEAU &&
-        horlogeIntro.getElapsedTime().asSeconds() >= 3.5f)
+    if (etat == EtatJeu::INTRO_NIVEAU &&  horlogeIntro.getElapsedTime().asSeconds() >= 3.5f)
         lancerPartie();
 
     if (etat != EtatJeu::JOUER) return;
@@ -162,8 +154,7 @@ void Jeu::mettreAJour() {
 
     distanceParcourue += vitesseObs() * 0.5f;
     if (distanceParcourue >= distanceNiveau()) {
-        etat = (niveauActuel + 1 < Constantes::NB_NIVEAUX)
-               ? EtatJeu::NIVEAU_REUSSI : EtatJeu::VICTOIRE;
+        etat = (niveauActuel + 1 < Constantes::NB_NIVEAUX) ? EtatJeu::NIVEAU_REUSSI : EtatJeu::VICTOIRE;
         return;
     }
 
@@ -177,8 +168,7 @@ void Jeu::mettreAJour() {
 
     for (auto& obs : obstacles) {
         obs.deplacer();
-        if (!obs.estDetruit() &&
-            joueur.obtenirBornes().intersects(obs.obtenirBornes())) {
+        if (!obs.estDetruit() && joueur.obtenirBornes().intersects(obs.obtenirBornes())) {
             obs.detruire();
             bool mort = joueur.recevoirCoup();
             if (mort) { etat = EtatJeu::FIN_PARTIE; return; }
@@ -186,8 +176,7 @@ void Jeu::mettreAJour() {
     }
 
     obstacles.erase(
-        std::remove_if(obstacles.begin(), obstacles.end(),
-            [](const Obstacle& o){ return o.estHorsEcran(); }),
+        std::remove_if(obstacles.begin(), obstacles.end(), [](const Obstacle& o){ return o.estHorsEcran(); }),
         obstacles.end());
 }
 
@@ -293,8 +282,8 @@ void Jeu::dessinerFondNiveau(float vitesseDefilement) {
 void Jeu::dessinerMenu() {
     fenetre.clear(sf::Color(15, 15, 35));
     dessinerEtoiles();
-    afficherTextreCentre("JEU DE CACHETTE", 56, 90,  sf::Color(255, 220, 60));
-    afficherTextreCentre("Course vers l'abri - 3 niveaux !", 22, 155, sf::Color(180, 180, 220));
+    afficherTextreCentre("JEU DE SFRCH", 56, 90,  sf::Color(255, 220, 60));
+    afficherTextreCentre("Course vers la survie - 3 niveaux !", 22, 155, sf::Color(180, 180, 220));
     sf::RectangleShape boite({340.f, 190.f});
     boite.setFillColor(sf::Color(30, 30, 60, 200));
     boite.setOutlineColor(sf::Color(100, 100, 180));
@@ -304,24 +293,24 @@ void Jeu::dessinerMenu() {
     afficherTextreCentre("[1]  Jouer",       30, 263, sf::Color(100, 230, 100));
     afficherTextreCentre("[2]  A propos",    30, 308, sf::Color(100, 180, 255));
     afficherTextreCentre("[ECHAP]  Quitter", 30, 353, sf::Color(220, 100, 100));
-    afficherTextreCentre("Jungle  /  Desert  /  Montagne", 16, 430, sf::Color(160, 160, 160));
+    afficherTextreCentre("FORET  /  KALAHARI  /  ARCTIQUE", 16, 430, sf::Color(160, 160, 160));
 }
 
 void Jeu::dessinerAPropos() {
     fenetre.clear(sf::Color(15, 15, 35));
     afficherTextreCentre("A PROPOS", 42, 50, sf::Color(255, 220, 60));
     std::vector<std::pair<std::string, sf::Color>> lignes = {
-        {"3 niveaux : Jungle -> Desert -> Montagne",              sf::Color(200,200,255)},
+        {"3 niveaux : FORET -> KALAHARI -> ARCTIQUE",              sf::Color(200,200,255)},
         {"",                                                        sf::Color::White},
         {"CONTROLES :",                                            sf::Color(255,200,80)},
         {"  [ESPACE]     -> Sauter (bloque si obstacle aerien !)", sf::Color(200,200,200)},
-        {"  [S] ou [BAS] -> Se baisser",                          sf::Color(200,200,200)},
+        {" [BAS] -> Se baisser",                          sf::Color(200,200,200)},
         {"  [ECHAP]      -> Quitter / Menu",                       sf::Color(200,200,200)},
         {"",                                                        sf::Color::White},
         {"OBSTACLES :",                                            sf::Color(255,200,80)},
         {"  Rocher/Cristal (sol)   -> Sautez !",                  sf::Color(100,230,100)},
         {"  Filet/Piege (air)      -> Baissez-vous !",            sf::Color(230,100,100)},
-        {"  IMPOSSIBLE de sauter par-dessus le piege aerien !",   sf::Color(255,100,100)},
+        {" !!! IMPOSSIBLE de sauter par-dessus le piege aerien !",   sf::Color(255,100,100)},
         {"",                                                        sf::Color::White},
         {"3 vies - invincibilite 2,5s apres choc.",               sf::Color(220,220,220)},
         {"Chaque niveau est plus rapide !",                        sf::Color(255,160,80)},

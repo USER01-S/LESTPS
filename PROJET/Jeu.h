@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JEU_H
+#define JEU_H
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "EtatJeu.h"
@@ -72,3 +73,4 @@ public:
     void mettreAJour();
     void afficher();
 };
+#endif //JEU_H

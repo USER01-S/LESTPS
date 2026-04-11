@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ETATJEU_H
+#define ETATJEU_H
 
 enum class EtatJeu {
     MENU,
@@ -9,3 +10,6 @@ enum class EtatJeu {
     FIN_PARTIE,
     VICTOIRE
 };
+#endif //ETATJEU_H
+
+

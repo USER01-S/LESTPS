@@ -1,4 +1,5 @@
-#pragma once
+#ifndef OBSTACLE_H
+#define OBSTACLE_H
 #include <SFML/Graphics.hpp>
 
 class Obstacle {
@@ -20,3 +21,4 @@ public:
     void          detruire();
     bool          estDetruit() const;
 };
+#endif //OBSTACLE_H

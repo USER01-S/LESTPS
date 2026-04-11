@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CONSTANTES_H
+#define CONSTANTES_H
 #include <string>
 
 namespace Constantes {
@@ -25,7 +26,7 @@ namespace Constantes {
     const float VITESSE_OBS[3]         = { 4.f,  6.f,  8.f  };
     const float VITESSE_MAX_OBS[3]     = { 8.f, 11.f, 15.f  };
     const int   DUREE_NIVEAU[3]        = { 150,  100,   90   };
-    const float DISTANCE_NIVEAU[3]     = { 2500.f, 3000.f, 3500.f };
+    const float DISTANCE_NIVEAU[3]     = { 2500.f, 3000.f, 7000.f };
     const float INTERVALLE_MIN[3]      = { 1.2f,  0.9f,  0.6f };
 
     const std::string FICHIERS_FOND[3] = {
@@ -36,13 +37,14 @@ namespace Constantes {
 
     const std::string FICHIERS_OBS[3][2] = {
         { "obstA.png",  "obst2A.png"  },
-        { "obstB.png",  "obst2B.png"  },
-        { "obstC.png",  "obst2C.png"  }
+        { "obst2B.png",  "obstB.png"  },
+        { "obst2C.png",  "obstC.png"  }
     };
 
     const std::string NOMS_NIVEAUX[3] = {
-        "Niveau 1 - Jungle",
-        "Niveau 2 - Desert",
-        "Niveau 3 - Montagne"
+        "Niveau 1 - FORET",
+        "Niveau 2 - KALAHARI",
+        "Niveau 3 - ARCTIQUE"
     };
 }
+#endif //CONSTANTES_H

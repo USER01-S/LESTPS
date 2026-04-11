@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ARRIERE_PLAN_H
+#define ARRIERE_PLAN_H
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -13,3 +14,4 @@ public:
     void dessiner(sf::RenderWindow& fenetre) const;
     void reinitialiser();
 };
+#endif //ARRIERE_PLAN_H

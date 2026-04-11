@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JOUEUR__H
+#define JOUEUR__H
 #include <SFML/Graphics.hpp>
 
 class Joueur {
@@ -35,3 +36,4 @@ public:
     bool estAccroupi() const;
     bool estEnAir()    const;
 };
+#endif //JOUEUR_H

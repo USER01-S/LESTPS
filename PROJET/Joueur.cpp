@@ -4,7 +4,7 @@
 
 Joueur::Joueur() {
     sf::Image img;
-    bool charge = img.loadFromFile("perso__1_.png");
+    bool charge = img.loadFromFile("perso.png");
     if (!charge) charge = img.loadFromFile("perso.png");
 
     if (charge) {
@@ -129,7 +129,6 @@ void Joueur::sAccroupir(bool actif) {
         }
     }
 }
-
 void Joueur::mettreAJour() {
     // Fin d'invincibilité
     if (invincible && horlogeBlessure.getElapsedTime().asSeconds() > DUREE_INVINCIBLE) {
@@ -186,8 +185,7 @@ bool Joueur::recevoirCoup() {
 }
 
 sf::FloatRect Joueur::obtenirBornes() const {
-    sf::FloatRect b = utiliserSecours ? rectSecours.getGlobalBounds()
-                                      : sprite.getGlobalBounds();
+    sf::FloatRect b = utiliserSecours ? rectSecours.getGlobalBounds() : sprite.getGlobalBounds();
     float rx = b.width  * 0.20f;
     float ry = b.height * 0.10f;
     return {b.left + rx, b.top + ry, b.width - 2*rx, b.height - 2*ry};

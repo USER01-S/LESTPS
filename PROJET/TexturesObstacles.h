@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TEXTURESOBSTACLES_H
+#define TEXTURESOBSTACLES_H
 #include <SFML/Graphics.hpp>
 
 class TexturesObstacles {
@@ -10,3 +11,4 @@ public:
 
     void charger();
 };
+#endif //TEXTURESOBSTACLES_H
